@@ -9,8 +9,8 @@ const CHANNELS = [
   {
     icon: Mail,
     label: "General & partnerships",
-    value: "contact@transplus.org",
-    href: "mailto:contact@transplus.org",
+    value: "info@transplug.org",
+    href: "mailto:info@transplug.org",
     note: "Media, partnership, and funding enquiries.",
   },
   {
