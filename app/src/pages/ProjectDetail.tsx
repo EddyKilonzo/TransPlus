@@ -157,7 +157,7 @@ export default function ProjectDetail() {
         </Reveal>
         <div className="mt-12 grid gap-5 sm:grid-cols-2">
           {project.asks.map((ask, i) => (
-            <Reveal delay={i * 0.08} key={ask.audience} className={`glow-card rounded-3xl border border-ink/[0.07] p-8 ${project.tint}`}>
+            <Reveal delay={i * 0.08} key={ask.audience} className="glow-card rounded-3xl border border-white/60 bg-white/70 p-8 shadow-[0_8px_32px_-16px_rgba(14,18,15,0.25)] backdrop-blur-xl">
               <p className={`font-display text-sm font-semibold ${project.accent}`}>{ask.audience}</p>
               <p className="mt-3 text-sm leading-relaxed text-ink/70">{ask.ask}</p>
             </Reveal>

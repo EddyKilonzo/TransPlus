@@ -180,7 +180,7 @@ export default function Home() {
         </Reveal>
         <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
           {PROJECTS.map((p, i) => (
-            <Reveal delay={i * 0.08} key={p.slug} className={`glow-card group flex flex-col overflow-hidden rounded-3xl border border-ink/[0.07] ${p.tint}`}>
+            <Reveal delay={i * 0.08} key={p.slug} className={`glow-card group flex flex-col overflow-hidden rounded-3xl border border-white/60 shadow-[0_8px_32px_-16px_rgba(14,18,15,0.25)] backdrop-blur-xl ${p.tint}`}>
               <div className="relative h-40 overflow-hidden">
                 <img
                   src={p.image}
