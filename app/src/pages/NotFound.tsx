@@ -1,8 +1,10 @@
 import { Link } from "react-router";
+import Seo from "@/components/Seo";
 
 export default function NotFound() {
   return (
     <div className="container-x flex min-h-[70vh] flex-col items-center justify-center pt-24 text-center">
+      <Seo title="Page Not Found" noindex />
       <span className="eyebrow">404</span>
       <h1 className="mt-4 font-display text-4xl font-semibold tracking-tight text-ink sm:text-5xl">
         This page doesn't exist.

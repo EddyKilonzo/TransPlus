@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url><loc>/</loc></url>
-  <url><loc>/#/about</loc></url>
-  <url><loc>/#/work</loc></url>
-  <url><loc>/#/projects</loc></url>
-  <url><loc>/#/projects/decriminalization-advocacy</loc></url>
-  <url><loc>/#/projects/legal-support</loc></url>
-  <url><loc>/#/projects/access-to-srhr</loc></url>
-  <url><loc>/#/projects/digital-platforms</loc></url>
-  <url><loc>/#/support</loc></url>
-  <url><loc>/#/reports</loc></url>
-  <url><loc>/#/contact</loc></url>
+  <url><loc>https://transplug.org/</loc></url>
+  <url><loc>https://transplug.org/about</loc></url>
+  <url><loc>https://transplug.org/work</loc></url>
+  <url><loc>https://transplug.org/projects</loc></url>
+  <url><loc>https://transplug.org/projects/decriminalization-advocacy</loc></url>
+  <url><loc>https://transplug.org/projects/legal-support</loc></url>
+  <url><loc>https://transplug.org/projects/access-to-srhr</loc></url>
+  <url><loc>https://transplug.org/projects/digital-platforms</loc></url>
+  <url><loc>https://transplug.org/support</loc></url>
+  <url><loc>https://transplug.org/reports</loc></url>
+  <url><loc>https://transplug.org/contact</loc></url>
 </urlset>
