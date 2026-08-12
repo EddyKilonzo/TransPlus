@@ -1,8 +1,10 @@
 import { motion } from "framer-motion";
-import { ArrowUpRight, Mail, MapPin, ShieldAlert } from "lucide-react";
+import { ArrowUpRight, Instagram, Mail, MapPin, ShieldAlert } from "lucide-react";
 import SpinningBadge from "@/components/SpinningBadge";
 import MapSection from "@/components/MapSection";
 import Reveal from "@/components/Reveal";
+import Seo from "@/components/Seo";
+import { INSTAGRAM_PROFILE } from "@/components/InstagramFeed";
 import { EASE } from "@/lib/motion";
 
 const CHANNELS = [
@@ -12,6 +14,13 @@ const CHANNELS = [
     value: "info@transplug.org",
     href: "mailto:info@transplug.org",
     note: "Media, partnership, and funding enquiries.",
+  },
+  {
+    icon: Instagram,
+    label: "Instagram",
+    value: "@trans.plus.ug",
+    href: INSTAGRAM_PROFILE,
+    note: "Updates, events, and stories from the community.",
   },
   {
     icon: MapPin,
@@ -24,6 +33,10 @@ const CHANNELS = [
 export default function Contact() {
   return (
     <div>
+      <Seo
+        title="Contact"
+        description="Get in touch with Trans+ about partnership, funding, media, or support — working across the Kenya-Uganda border corridor."
+      />
       <section className="container-x pt-32 pb-16 sm:pt-40">
         <div className="flex flex-col items-start justify-between gap-10 sm:flex-row sm:items-center">
           <motion.div
@@ -52,9 +65,9 @@ export default function Contact() {
           </motion.div>
         </div>
 
-        <div className="mt-14 grid gap-5 lg:grid-cols-[1fr_1fr_1.1fr]">
+        <div className="masonry masonry-4 mt-14">
           {CHANNELS.map((c, i) => (
-            <Reveal delay={i * 0.08} key={c.label} className="glow-card rounded-3xl border border-ink/[0.07] bg-white p-8">
+            <Reveal delay={i * 0.08} key={c.label} className="glow-card frost rounded-3xl p-8">
               <span className="flex h-12 w-12 items-center justify-center rounded-2xl bg-pine/10 text-pine">
                 <c.icon size={22} strokeWidth={1.75} />
               </span>
@@ -62,6 +75,7 @@ export default function Contact() {
               {c.href ? (
                 <a
                   href={c.href}
+                  {...(c.href.startsWith("http") ? { target: "_blank", rel: "noopener noreferrer" } : {})}
                   className="link-underline mt-2 block font-display text-xl font-semibold text-ink"
                 >
                   {c.value}

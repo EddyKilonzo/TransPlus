@@ -4,6 +4,7 @@ import Marquee from "@/components/Marquee";
 import { REPORTS } from "@/data/reports";
 import { TESTIMONIES } from "@/data/testimonies";
 import Reveal from "@/components/Reveal";
+import Seo from "@/components/Seo";
 
 const MARQUEE_ITEMS = ["ADVOCACY BRIEFINGS", "FIELD RESEARCH", "POLICY ANALYSIS", "COMMUNITY DATA"];
 
@@ -12,6 +13,10 @@ export default function Reports() {
 
   return (
     <div>
+      <Seo
+        title="Reports"
+        description="An advocacy briefing series documenting the legal, health, and digital realities queer sex workers face along the Kenya-Uganda border."
+      />
       <PageHero
         eyebrow="Reports"
         titleLines={["What we", "learn."]}
@@ -64,9 +69,9 @@ export default function Reports() {
         </Reveal>
 
         {/* Rest */}
-        <div className="mt-6 grid gap-6 sm:grid-cols-2">
+        <div className="masonry masonry-2 masonry-wide mt-6">
           {rest.map((report, i) => (
-            <Reveal as="article" delay={0.1 + i * 0.08} key={report.slug} className="glow-card panel-line group flex flex-col overflow-hidden rounded-3xl border bg-white">
+            <Reveal as="article" delay={0.1 + i * 0.08} key={report.slug} className="glow-card frost group flex flex-col overflow-hidden rounded-3xl">
               <div className="relative h-44 overflow-hidden">
                 <img
                   src={report.image}
@@ -127,9 +132,9 @@ export default function Reports() {
             </p>
           </Reveal>
 
-          <div className="mt-12 grid gap-5 lg:grid-cols-3">
+          <div className="masonry masonry-3 mt-12">
             {TESTIMONIES.map((t, i) => (
-              <Reveal as="figure" delay={i * 0.08} key={t.reportSlug} className="group flex flex-col overflow-hidden rounded-3xl border border-white/10 bg-white/[0.05] transition-colors hover:bg-white/[0.09]">
+              <Reveal as="figure" delay={i * 0.08} key={t.reportSlug} className="frost-dark group flex flex-col overflow-hidden rounded-3xl transition-colors">
                 <div className="relative h-40 overflow-hidden">
                   <img
                     src={t.image}

@@ -25,7 +25,7 @@ export default function Navbar() {
   return (
     <header className="fixed inset-x-0 top-0 z-[60]">
       <div className="container-x pt-4">
-        <div className="flex items-center justify-between gap-4 rounded-full border border-ink/[0.08] bg-white px-4 py-2.5 shadow-[0_10px_40px_-18px_rgba(14,18,15,0.3)] sm:px-6">
+        <div className="frost flex items-center justify-between gap-4 rounded-full px-4 py-2.5 shadow-[0_10px_40px_-18px_rgba(14,18,15,0.3)] sm:px-6">
           <Link
             to="/"
             className="group flex items-center gap-2.5 font-display text-lg font-semibold tracking-tight text-ink"

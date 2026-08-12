@@ -56,7 +56,7 @@ export default function MapSection() {
         </p>
       </Reveal>
 
-      <Reveal delay={0.1} className="mt-12 grid gap-6 overflow-hidden rounded-[2rem] border border-ink/[0.07] bg-white lg:grid-cols-[1.5fr_1fr]">
+      <Reveal delay={0.1} className="frost mt-12 grid gap-6 overflow-hidden rounded-[2rem] lg:grid-cols-[1.5fr_1fr]">
         {/* Map */}
         <div className="relative bg-fog/60 p-4 sm:p-6">
           <svg

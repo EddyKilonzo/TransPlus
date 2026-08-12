@@ -46,10 +46,10 @@ function Step({ step, tone }: { step: (typeof APPROACH)[number]; tone: "light" |
     <motion.div
       ref={ref}
       style={{ y, scale }}
-      className={`rounded-[1.75rem] border p-7 backdrop-blur-md sm:p-8 ${
+      className={`rounded-[1.75rem] p-7 sm:p-8 ${
         dark
-          ? "border-white/15 bg-white/[0.08] shadow-[0_-14px_44px_-26px_rgba(0,0,0,0.75)]"
-          : "border-ink/[0.08] bg-white/80 shadow-[0_-14px_44px_-28px_rgba(14,18,15,0.45)]"
+          ? "frost-dark shadow-[0_-14px_44px_-26px_rgba(0,0,0,0.75)]"
+          : "frost shadow-[0_-14px_44px_-28px_rgba(14,18,15,0.45)]"
       }`}
     >
       <div className="flex items-start gap-5 sm:gap-6">

@@ -5,6 +5,7 @@ import { ArrowRight } from "lucide-react";
 import PageHero from "@/components/PageHero";
 import Marquee from "@/components/Marquee";
 import Reveal from "@/components/Reveal";
+import Seo from "@/components/Seo";
 import { PROJECTS, type Project } from "@/data/projects";
 
 const MARQUEE_ITEMS = ["01 DECRIMINALIZATION", "02 LEGAL SUPPORT", "03 SRHR ACCESS", "04 DIGITAL PLATFORMS"];
@@ -23,7 +24,7 @@ function ProjectRow({ project, index }: { project: Project; index: number }) {
   return (
     <div
       ref={ref}
-      className="group relative overflow-hidden rounded-[2rem] border border-ink/[0.07] bg-white shadow-[0_-16px_50px_-26px_rgba(14,18,15,0.4)]"
+      className="frost group relative overflow-hidden rounded-[2rem]"
     >
       {/* opaque base + tint wash — keeps stacked cards from showing through each other */}
       <div className={`pointer-events-none absolute inset-0 ${project.tint}`} aria-hidden="true" />
@@ -88,6 +89,10 @@ function ProjectRow({ project, index }: { project: Project; index: number }) {
 export default function Projects() {
   return (
     <div>
+      <Seo
+        title="Projects"
+        description="Four community-led programs — decriminalization advocacy, legal support, SRHR access, and digital platforms — along the Kenya-Uganda border."
+      />
       <PageHero
         eyebrow="Projects"
         titleLines={["Where the", "work lives."]}

@@ -1,6 +1,7 @@
 import PageHero from "@/components/PageHero";
 import Marquee from "@/components/Marquee";
 import Reveal from "@/components/Reveal";
+import Seo from "@/components/Seo";
 
 const ROLE_TICKER = ["Organizers", "Paralegals", "Peer health educators", "Digital security trainers"];
 
@@ -22,6 +23,10 @@ const VALUES = [
 export default function About() {
   return (
     <div>
+      <Seo
+        title="About Us"
+        description="Founded by and for queer and transgender sex workers along the Kenya-Uganda border — community-led organizing for safety, dignity, and rights."
+      />
       <PageHero
         eyebrow="Who We Are"
         titleLines={["About", "Us"]}
@@ -51,10 +56,10 @@ export default function About() {
             </Reveal>
 
             {/* Supporting paragraphs as offset frosted cards */}
-            <div className="mt-12 grid gap-6 sm:grid-cols-2">
+            <div className="masonry masonry-2 masonry-wide mt-12">
               <Reveal
                 delay={0.08}
-                className="glow-card relative overflow-hidden rounded-[1.75rem] border border-white/60 bg-white/70 p-8 shadow-[0_8px_32px_-16px_rgba(14,18,15,0.25)] backdrop-blur-xl"
+                className="glow-card frost relative overflow-hidden rounded-[1.75rem] p-8"
               >
                 <div className="pointer-events-none absolute inset-0 bg-gradient-to-br from-pine/[0.13] via-transparent to-transparent" />
                 <span
@@ -78,7 +83,7 @@ export default function About() {
 
               <Reveal
                 delay={0.16}
-                className="glow-card relative overflow-hidden rounded-[1.75rem] border border-white/60 bg-white/70 p-8 shadow-[0_8px_32px_-16px_rgba(14,18,15,0.25)] backdrop-blur-xl sm:mt-10"
+                className="glow-card frost relative overflow-hidden rounded-[1.75rem] p-8 sm:mt-10"
               >
                 <div className="pointer-events-none absolute inset-0 bg-gradient-to-bl from-warm/[0.14] via-transparent to-transparent" />
                 <span
@@ -103,7 +108,7 @@ export default function About() {
           </div>
         </div>
 
-        <div className="mt-12 grid gap-5 sm:grid-cols-2">
+        <div className="masonry masonry-2 mt-12">
           {[
             { src: "/images/8.jpeg", caption: "My body, my business." },
             { src: "/images/3.jpeg", caption: "I own my story — every chapter." },
@@ -130,9 +135,9 @@ export default function About() {
               Our values
             </h2>
           </Reveal>
-          <div className="mt-12 grid gap-5 sm:grid-cols-3">
+          <div className="masonry masonry-3 mt-12">
             {VALUES.map((v, i) => (
-              <Reveal delay={i * 0.08} key={v.title} className="rounded-3xl border border-white/10 bg-white/[0.07] p-8 transition-colors hover:bg-white/[0.12]">
+              <Reveal delay={i * 0.08} key={v.title} className="frost-dark rounded-3xl p-8 transition-colors">
                 <h3 className="font-display text-lg font-semibold text-white">{v.title}</h3>
                 <p className="mt-3 text-sm leading-relaxed text-white/60">{v.desc}</p>
               </Reveal>

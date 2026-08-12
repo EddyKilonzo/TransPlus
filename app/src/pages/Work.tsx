@@ -6,12 +6,17 @@ import ApproachTimeline from "@/components/ApproachTimeline";
 import { PROJECTS } from "@/data/projects";
 import { DOCUMENTED_PATTERNS } from "@/data/testimonies";
 import Reveal from "@/components/Reveal";
+import Seo from "@/components/Seo";
 
 const MARQUEE_ITEMS = ["DECRIMINALIZATION", "LEGAL AID", "SRHR ACCESS", "DIGITAL SAFETY"];
 
 export default function Work() {
   return (
     <div>
+      <Seo
+        title="Our Work"
+        description="Legal advocacy, direct support, SRHR access, and digital safety tools — four areas that reinforce each other along the Kenya-Uganda border."
+      />
       <PageHero
         eyebrow="Our Work"
         titleLines={["Four areas.", "One goal."]}
@@ -31,7 +36,7 @@ export default function Work() {
             className="sticky"
             style={{ top: `${104 + i * 20}px` }}
           >
-            <div className="group grid overflow-hidden rounded-3xl border border-ink/[0.07] bg-white shadow-[0_-16px_50px_-26px_rgba(14,18,15,0.4)] sm:grid-cols-[240px_1fr_auto] sm:items-center">
+            <div className="frost group grid overflow-hidden rounded-3xl sm:grid-cols-[240px_1fr_auto] sm:items-center">
               <div className="relative h-44 overflow-hidden sm:h-full sm:min-h-[220px]">
                 <img
                   src={p.image}
@@ -77,12 +82,12 @@ export default function Work() {
           </p>
         </Reveal>
 
-        <div className="mt-12 grid gap-5 sm:grid-cols-2">
+        <div className="masonry masonry-2 mt-12">
           {DOCUMENTED_PATTERNS.map((pattern, i) => (
             <Reveal
               delay={i * 0.08}
               key={pattern.label}
-              className="glow-card relative overflow-hidden rounded-3xl border border-white/60 bg-white/70 p-8 shadow-[0_8px_32px_-16px_rgba(14,18,15,0.25)] backdrop-blur-xl"
+              className="glow-card frost relative overflow-hidden rounded-3xl p-8"
             >
               {/* warm wash under the frost — keeps these readable over the hex field */}
               <div className="pointer-events-none absolute inset-0 bg-gradient-to-br from-warm/[0.14] via-transparent to-pine/[0.06]" />

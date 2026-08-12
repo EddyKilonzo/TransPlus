@@ -7,6 +7,7 @@ import { PROJECTS } from "@/data/projects";
 import { REPORTS } from "@/data/reports";
 import { TESTIMONIES } from "@/data/testimonies";
 import Reveal from "@/components/Reveal";
+import Seo from "@/components/Seo";
 import { EASE } from "@/lib/motion";
 
 export default function ProjectDetail() {
@@ -26,6 +27,7 @@ export default function ProjectDetail() {
 
   return (
     <div>
+      <Seo title={project.title} description={project.summary} />
       {/* Hero — full-bleed image with the programme number oversized behind it */}
       <section ref={heroRef} className="relative overflow-hidden">
         <motion.div style={{ y: heroY }} className="absolute inset-0">
@@ -73,20 +75,46 @@ export default function ProjectDetail() {
 
       {/* Context */}
       <section className="container-x py-24">
-        <div className="grid gap-12 lg:grid-cols-[200px_1fr]">
-          <Reveal as="span" className="eyebrow">
-            The Context
+        <div className="grid gap-10 lg:grid-cols-[210px_1fr] lg:gap-14">
+          <Reveal variant="left">
+            <span className="eyebrow">The Context</span>
+            <span aria-hidden="true" className="mt-4 block h-px w-16 bg-pine/40" />
+            <span
+              aria-hidden="true"
+              className="mt-6 hidden select-none font-display text-[5rem] font-bold leading-none text-ink/[0.07] lg:block"
+            >
+              {project.number}
+            </span>
           </Reveal>
-          <Reveal delay={0.05} className="max-w-3xl">
-            <p className="text-2xl font-medium leading-snug text-ink sm:text-3xl">{project.context}</p>
-            <p className="mt-8 border-l-2 border-pine/30 pl-6 text-base leading-relaxed text-ink/72">
-              {project.description}
+
+          <Reveal variant="right" delay={0.05} className="max-w-3xl">
+            {/* the lede reads as editorial copy… */}
+            <p className="font-display text-2xl font-medium leading-[1.35] tracking-tight text-ink sm:text-[1.85rem]">
+              {project.context}
             </p>
+
+            {/* …and what we do about it sits on its own frosted card */}
+            <div className="frost relative mt-9 overflow-hidden rounded-[1.75rem] p-8 sm:p-9">
+              <div className={`pointer-events-none absolute inset-0 ${project.tint}`} aria-hidden="true" />
+              <div className="relative flex flex-col gap-5 sm:flex-row sm:items-start sm:gap-6">
+                <span
+                  className={`flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-white shadow-sm ${project.accent}`}
+                >
+                  <project.icon size={22} strokeWidth={1.75} />
+                </span>
+                <div>
+                  <span className={`font-display text-xs font-semibold uppercase tracking-[0.22em] ${project.accent}`}>
+                    Our response
+                  </span>
+                  <p className="mt-3 text-base leading-[1.75] text-ink/75">{project.description}</p>
+                </div>
+              </div>
+            </div>
           </Reveal>
         </div>
 
         {/* Gallery */}
-        <div className="mt-14 grid gap-5 sm:grid-cols-2">
+        <div className="masonry masonry-2 mt-14">
           {project.gallery.map((src, i) => (
             <Reveal delay={0.1 + i * 0.08} key={src} className="group aspect-[4/3] overflow-hidden rounded-[1.75rem] border border-ink/[0.06]">
               <img
@@ -110,9 +138,9 @@ export default function ProjectDetail() {
             </h2>
           </Reveal>
 
-          <div className="mt-12 grid gap-5 lg:grid-cols-3">
+          <div className="masonry masonry-3 mt-12">
             {project.approach.map((step, i) => (
-              <Reveal delay={i * 0.08} key={step.title} className="group rounded-3xl border border-white/10 bg-white/[0.06] p-8 transition-colors hover:bg-white/[0.11]">
+              <Reveal delay={i * 0.08} key={step.title} className="frost-dark group rounded-3xl p-8 transition-colors">
                 <span className="font-display text-xs font-semibold text-leaf">
                   {String(i + 1).padStart(2, "0")}
                 </span>
@@ -155,9 +183,9 @@ export default function ProjectDetail() {
             Recommendations
           </h2>
         </Reveal>
-        <div className="mt-12 grid gap-5 sm:grid-cols-2">
+        <div className="masonry masonry-2 mt-12">
           {project.asks.map((ask, i) => (
-            <Reveal delay={i * 0.08} key={ask.audience} className="glow-card rounded-3xl border border-white/60 bg-white/70 p-8 shadow-[0_8px_32px_-16px_rgba(14,18,15,0.25)] backdrop-blur-xl">
+            <Reveal delay={i * 0.08} key={ask.audience} className="glow-card frost rounded-3xl p-8">
               <p className={`font-display text-sm font-semibold ${project.accent}`}>{ask.audience}</p>
               <p className="mt-3 text-sm leading-relaxed text-ink/70">{ask.ask}</p>
             </Reveal>
@@ -168,7 +196,7 @@ export default function ProjectDetail() {
       {/* Related report */}
       {report && (
         <section className="container-x pb-24">
-          <Reveal as="article" className="glow-card grid gap-8 overflow-hidden rounded-[2rem] border border-ink/[0.07] bg-white sm:grid-cols-[1fr_240px] sm:items-center">
+          <Reveal as="article" className="glow-card frost grid gap-8 overflow-hidden rounded-[2rem] sm:grid-cols-[1fr_240px] sm:items-center">
             <div className="p-8 sm:p-10">
               <span className="eyebrow">Read the paper · {report.series}</span>
               <h3 className="mt-3 font-display text-2xl font-semibold text-ink">{report.title}</h3>

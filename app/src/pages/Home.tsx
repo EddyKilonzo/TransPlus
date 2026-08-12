@@ -3,7 +3,9 @@ import { Link } from "react-router";
 import { motion, useReducedMotion, useScroll, useTransform } from "framer-motion";
 import { ArrowRight, Fingerprint, HeartHandshake, Quote, Scale, Users } from "lucide-react";
 import Marquee from "@/components/Marquee";
+import InstagramFeed from "@/components/InstagramFeed";
 import ApproachTimeline from "@/components/ApproachTimeline";
+import Seo from "@/components/Seo";
 import { PROJECTS } from "@/data/projects";
 import { COMMUNITY_VOICES } from "@/data/voices";
 import { TESTIMONIES } from "@/data/testimonies";
@@ -24,6 +26,12 @@ const ROLES = [
   { icon: Scale, label: "Paralegals" },
   { icon: HeartHandshake, label: "Peer educators" },
   { icon: Fingerprint, label: "Security trainers" },
+];
+
+const REALITY_CLAIMS = [
+  "Sex work is work",
+  "Full legal recognition",
+  "Safety without trade-offs",
 ];
 
 const COMMUNITY_CAPTIONS = [
@@ -70,6 +78,11 @@ function HeroVisual() {
 export default function Home() {
   const reduced = useReducedMotion();
 
+  // the last programme gets the full-width feature card under the masonry —
+  // four cards in a three-column wall would otherwise strand one on its own row
+  const featured = PROJECTS[PROJECTS.length - 1];
+  const walled = PROJECTS.slice(0, -1);
+
   const container = { hidden: {}, show: { transition: { staggerChildren: 0.1, delayChildren: 0.05 } } };
   const item = {
     hidden: { opacity: 0, y: reduced ? 0 : 24 },
@@ -78,6 +91,7 @@ export default function Home() {
 
   return (
     <div>
+      <Seo title="Trans+ — Safety, Dignity & Rights Along the Kenya-Uganda Border" />
       {/* Hero — sized so the marquee lands at the fold */}
       <div className="flex min-h-[100svh] flex-col justify-between">
       <section className="container-x relative flex flex-1 items-center pt-28 pb-10 sm:pt-32">
@@ -147,25 +161,61 @@ export default function Home() {
 
       {/* The Reality */}
       <section className="container-x py-24">
-        <div className="grid items-center gap-12 lg:grid-cols-2">
-          <Reveal >
+        <div className="grid items-center gap-12 lg:grid-cols-[1.1fr_0.9fr] lg:gap-16">
+          <Reveal variant="left">
             <span className="eyebrow">The Reality</span>
-            <p className="mt-6 text-2xl font-medium leading-snug text-ink sm:text-3xl">
-              We believe that <span className="text-pine">sex work is work</span>, that trans and
-              queer people deserve <span className="text-pine">full legal recognition and
-              protection</span>, and that no one should have to choose between their safety and
-              their livelihood.
-            </p>
+
+            {/* the thesis, carried on a gradient rule rather than in a box */}
+            <div className="relative mt-7 pl-6 sm:pl-8">
+              <span
+                aria-hidden="true"
+                className="absolute left-0 top-1.5 h-[calc(100%-0.75rem)] w-[3px] rounded-full bg-gradient-to-b from-pine via-moss to-leaf/0"
+              />
+              <p className="font-display text-2xl font-medium leading-[1.35] tracking-tight text-ink sm:text-[1.9rem]">
+                We believe that <span className="text-pine">sex work is work</span>, that trans and
+                queer people deserve{" "}
+                <span className="text-pine">full legal recognition and protection</span>, and that no
+                one should have to choose between their safety and their livelihood.
+              </p>
+            </div>
+
+            <ul className="mt-9 flex flex-wrap gap-2.5">
+              {REALITY_CLAIMS.map((claim, i) => (
+                <li
+                  key={claim}
+                  className="frost rounded-full px-4 py-2 font-display text-xs font-medium tracking-wide text-ink/70"
+                  style={{ transitionDelay: `${i * 60}ms` }}
+                >
+                  {claim}
+                </li>
+              ))}
+            </ul>
           </Reveal>
-          <Reveal as="figure" delay={0.15} className="group relative aspect-[4/5] w-full max-w-sm justify-self-center overflow-hidden rounded-[1.75rem] border-4 border-white shadow-xl">
-            <img
-              src="/images/6.jpeg"
-              alt="Everyday life along the Kenya-Uganda border"
-              className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
+
+          <Reveal
+            as="figure"
+            variant="scale"
+            delay={0.15}
+            className="group relative aspect-[4/5] w-full max-w-sm justify-self-center"
+          >
+            {/* offset frame behind the photo */}
+            <span
+              aria-hidden="true"
+              className="absolute -bottom-4 -right-4 h-full w-full rounded-[1.75rem] border border-pine/25 bg-pine/[0.06] transition-transform duration-700 group-hover:translate-x-1 group-hover:translate-y-1"
             />
-            <figcaption className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-ink/85 to-transparent p-5 font-display text-sm font-medium text-white">
-              Everyday life along the border
-            </figcaption>
+            <div className="relative h-full w-full overflow-hidden rounded-[1.75rem] border-4 border-white shadow-xl">
+              <img
+                src="/images/6.jpeg"
+                alt="Everyday life along the Kenya-Uganda border"
+                className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
+              />
+              <figcaption className="frost-photo absolute inset-x-4 bottom-4 rounded-2xl px-4 py-3 font-display text-sm font-medium text-white">
+                Everyday life along the border
+                <span className="mt-0.5 block text-xs font-normal text-white/65">
+                  Busia · Kenya–Uganda corridor
+                </span>
+              </figcaption>
+            </div>
           </Reveal>
         </div>
       </section>
@@ -178,9 +228,9 @@ export default function Home() {
             Four connected areas. One goal.
           </h2>
         </Reveal>
-        <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-          {PROJECTS.map((p, i) => (
-            <Reveal delay={i * 0.08} key={p.slug} className={`glow-card group flex flex-col overflow-hidden rounded-3xl border border-white/60 shadow-[0_8px_32px_-16px_rgba(14,18,15,0.25)] backdrop-blur-xl ${p.tint}`}>
+        <div className="masonry masonry-3 mt-12">
+          {walled.map((p, i) => (
+            <Reveal delay={i * 0.08} key={p.slug} className="glow-card frost group flex flex-col overflow-hidden rounded-3xl">
               <div className="relative h-40 overflow-hidden">
                 <img
                   src={p.image}
@@ -197,7 +247,7 @@ export default function Home() {
                   {p.number}
                 </span>
               </div>
-              <div className="flex flex-1 flex-col bg-white/70 p-8">
+              <div className={`flex flex-1 flex-col p-8 ${p.tint}`}>
                 <h3 className="font-display text-xl font-semibold text-ink">{p.title}</h3>
                 <p className="mt-3 text-sm leading-relaxed text-ink/72">{p.summary}</p>
                 <Link
@@ -211,6 +261,66 @@ export default function Home() {
             </Reveal>
           ))}
         </div>
+
+        {/* Wide feature card — the programme that closes the set gets room to breathe */}
+        <Reveal delay={0.24} className="group mt-6 block">
+          <article className="frost relative overflow-hidden rounded-[2rem] transition-all duration-500 hover:-translate-y-1 hover:shadow-[0_38px_84px_-42px_rgba(14,18,15,0.5)]">
+            <div className={`pointer-events-none absolute inset-0 ${featured.tint}`} aria-hidden="true" />
+
+            <div className="relative grid lg:grid-cols-[minmax(0,0.85fr)_1.15fr]">
+              {/* absolute image so it fills the row instead of dictating its height */}
+              <div className="relative h-52 overflow-hidden lg:h-auto lg:min-h-[20rem]">
+                <img
+                  src={featured.image}
+                  alt=""
+                  loading="lazy"
+                  className="absolute inset-0 h-full w-full object-cover transition-transform [transition-duration:900ms] group-hover:scale-105"
+                />
+                <span
+                  className={`absolute left-5 top-5 flex h-12 w-12 items-center justify-center rounded-2xl bg-white shadow-sm transition-transform duration-300 group-hover:-translate-y-0.5 ${featured.accent}`}
+                >
+                  <featured.icon size={22} strokeWidth={1.75} />
+                </span>
+              </div>
+
+              <div className="relative p-8 sm:p-10 lg:p-12">
+                <span
+                  aria-hidden="true"
+                  className="pointer-events-none absolute -top-4 right-6 select-none font-display text-[8rem] font-bold leading-none text-ink/[0.05]"
+                >
+                  {featured.number}
+                </span>
+
+                <span className={`font-display text-xs font-semibold uppercase tracking-[0.22em] ${featured.accent}`}>
+                  {featured.number} · Where it's heading
+                </span>
+                <h3 className="mt-4 max-w-lg font-display text-3xl font-semibold leading-tight tracking-tight text-ink sm:text-4xl">
+                  {featured.title}
+                </h3>
+                <p className="mt-4 max-w-2xl text-base leading-relaxed text-ink/72">{featured.summary}</p>
+
+                <ul className="mt-7 flex flex-wrap gap-2">
+                  {featured.approach.map((step) => (
+                    <li
+                      key={step.title}
+                      className="rounded-full border border-ink/[0.08] bg-white/70 px-3.5 py-1.5 font-display text-xs font-medium text-ink/65"
+                    >
+                      {step.title}
+                    </li>
+                  ))}
+                </ul>
+
+                <Link
+                  to={`/projects/${featured.slug}`}
+                  className="mt-8 inline-flex items-center gap-2 rounded-full bg-ink px-6 py-3.5 font-display text-sm font-medium text-white transition-all duration-300 hover:-translate-y-0.5 hover:bg-pine"
+                >
+                  Explore this project
+                  <ArrowRight size={16} className="transition-transform duration-300 group-hover:translate-x-1" />
+                </Link>
+              </div>
+            </div>
+          </article>
+        </Reveal>
       </section>
 
       {/* Community Voices */}
@@ -221,7 +331,7 @@ export default function Home() {
             In their own words.
           </h2>
         </Reveal>
-        <div className="mt-12 columns-1 gap-5 sm:columns-2 lg:columns-4 [&>*]:mb-5 [&>*]:break-inside-avoid">
+        <div className="masonry masonry-4 mt-12">
           {COMMUNITY_VOICES.map((voice, i) => (
             <Reveal as="figure" delay={(i % 4) * 0.08} key={voice.image} className="glow-card relative overflow-hidden rounded-3xl">
               <img src={voice.image} alt="" className="w-full object-cover" loading="lazy" />
@@ -248,9 +358,9 @@ export default function Home() {
               More about who we are <ArrowRight size={14} />
             </Link>
           </Reveal>
-          <div className="grid grid-cols-2 gap-4">
+          <div className="masonry masonry-2 [column-count:2]">
             {ROLES.map((role, i) => (
-              <Reveal delay={i * 0.08} key={role.label} className="flex flex-col items-center justify-center gap-3 rounded-2xl border border-white/10 bg-white/[0.07] px-4 py-10 text-center transition-colors hover:bg-white/[0.12]">
+              <Reveal delay={i * 0.08} key={role.label} className="frost-dark flex flex-col items-center justify-center gap-3 rounded-2xl px-4 py-10 text-center transition-colors">
                 <role.icon className="text-leaf" size={28} strokeWidth={1.5} />
                 <span className="font-display text-sm font-medium">{role.label}</span>
               </Reveal>
@@ -293,7 +403,7 @@ export default function Home() {
           </Link>
         </Reveal>
 
-        <div className="mt-12 grid gap-6 lg:grid-cols-3">
+        <div className="masonry masonry-3 masonry-wide mt-12">
           {TESTIMONIES.map((t, i) => (
             <Reveal
               as="figure"
@@ -308,7 +418,7 @@ export default function Home() {
                 src={t.image}
                 alt=""
                 loading="lazy"
-                className="absolute inset-0 h-full w-full object-cover transition-transform duration-[900ms] group-hover:scale-105"
+                className="absolute inset-0 h-full w-full object-cover transition-transform [transition-duration:900ms] group-hover:scale-105"
               />
               <div className="absolute inset-0 bg-gradient-to-b from-ink/25 via-ink/45 to-ink/70" />
 
@@ -321,7 +431,7 @@ export default function Home() {
                 </span>
 
                 {/* frosted card keeps the quote legible over any photo */}
-                <blockquote className="rounded-2xl border border-white/25 bg-white/15 p-6 shadow-lg backdrop-blur-md">
+                <blockquote className="frost-photo rounded-2xl p-6 shadow-lg">
                   <Quote className="text-leaf" size={22} strokeWidth={1.75} />
                   <p className="mt-3 text-sm font-medium leading-relaxed text-white drop-shadow-sm">
                     {t.quote}
@@ -368,7 +478,7 @@ export default function Home() {
         <div className="mt-12 flex flex-col gap-24 sm:gap-16">
           {PROJECTS.map((p, i) => (
             <div key={p.slug} className="sticky" style={{ top: `${96 + i * 20}px` }}>
-              <Reveal delay={i * 0.08} className={`glow-card rounded-3xl p-8 shadow-[0_30px_60px_-30px_rgba(14,18,15,0.25)] sm:p-10 ${ i % 2 === 0 ? "border border-ink/[0.06] bg-white" : "bg-fog" }`}>
+              <Reveal delay={i * 0.08} className={`glow-card frost rounded-3xl p-8 sm:p-10 ${i % 2 === 0 ? "" : "frost-fog"}`}>
                 <div className="grid gap-6 sm:grid-cols-[auto_1fr_auto] sm:items-center">
                   <span className="font-display text-4xl font-semibold text-ink/15">{p.number}</span>
                   <div>
@@ -393,6 +503,9 @@ export default function Home() {
           ))}
         </div>
       </section>
+
+      {/* Instagram feed */}
+      <InstagramFeed />
 
       {/* Final CTA */}
       <section className="container-x pb-24">

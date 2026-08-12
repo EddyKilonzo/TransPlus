@@ -4,6 +4,7 @@ import PageHero from "@/components/PageHero";
 import SpinningBadge from "@/components/SpinningBadge";
 import Marquee from "@/components/Marquee";
 import Reveal from "@/components/Reveal";
+import Seo from "@/components/Seo";
 
 const MARQUEE_ITEMS = ["DONATE", "VOLUNTEER", "PARTNER", "SPREAD THE WORD"];
 
@@ -33,6 +34,10 @@ const WAYS = [
 export default function Support() {
   return (
     <div>
+      <Seo
+        title="Support"
+        description="Donate, volunteer, partner, or spread the word — every contribution goes directly toward community-led safety, legal recognition, and health access."
+      />
       <PageHero
         eyebrow="Support Trans+"
         titleLines={["Stand with", "the community."]}
@@ -44,9 +49,9 @@ export default function Support() {
       <Marquee items={MARQUEE_ITEMS} />
 
       <section className="container-x py-24">
-        <div className="grid gap-5 sm:grid-cols-2">
+        <div className="masonry masonry-2">
           {WAYS.map((way, i) => (
-            <Reveal delay={i * 0.08} key={way.title} className="glow-card panel-line rounded-3xl border bg-white p-8">
+            <Reveal delay={i * 0.08} key={way.title} className="glow-card frost rounded-3xl p-8">
               <span className="flex h-12 w-12 items-center justify-center rounded-2xl bg-pine/10 text-pine">
                 <way.icon size={22} strokeWidth={1.75} />
               </span>

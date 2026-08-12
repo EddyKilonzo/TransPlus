@@ -1,4 +1,6 @@
 import { Link } from "react-router";
+import { Instagram } from "lucide-react";
+import { INSTAGRAM_PROFILE } from "./InstagramFeed";
 
 const FOOTER_LINKS = [
   { to: "/", label: "Home" },
@@ -34,6 +36,17 @@ export default function Footer() {
             <p className="mt-3 text-sm leading-relaxed text-white/50">
               Founded by and for queer and transgender sex workers along the Kenya-Uganda border.
             </p>
+            <div className="mt-6 flex items-center gap-3">
+              <a
+                href={INSTAGRAM_PROFILE}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Trans+ on Instagram (@trans.plus.ug)"
+                className="flex h-10 w-10 items-center justify-center rounded-full border border-white/15 text-white/70 transition-colors hover:border-white/40 hover:text-white"
+              >
+                <Instagram size={17} strokeWidth={1.75} />
+              </a>
+            </div>
           </div>
 
           {[FOOTER_LINKS.slice(0, 4), FOOTER_LINKS.slice(4)].map((group, i) => (
